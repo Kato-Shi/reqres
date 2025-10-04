@@ -1,0 +1,6 @@
+@ReqresIntegratedApplication.WebAPI_HostAddress = http://localhost:5135
+
+GET {{ReqresIntegratedApplication.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
