@@ -12,5 +12,8 @@ namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Entities
         public int perPage { get; set; }
         public int Total { get; set; }
 
+        public int TotalPages { get; set; }
+
+        public List<ResourceData>? Data { get; set; }
     }
 }
