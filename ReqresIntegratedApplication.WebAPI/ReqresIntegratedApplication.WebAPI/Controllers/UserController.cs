@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ReqresIntegratedApplication.Integration.ReqresIntegration.Services;
+using ReqResIntegratedApplication.Integration.ReqresIntegration.Entities;
+using ReqResIntegratedApplication.Integration.ReqresIntegration.Services;
 
 namespace ReqresIntegratedApplication.WebAPI.Controllers
 {
@@ -8,21 +11,49 @@ namespace ReqresIntegratedApplication.WebAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly HttpClient _httpClient;
+        private readonly UserServices _userServices;
 
-        public UserController(HttpClient httpClient)
+        public UserController(UserServices userServices)
         {
-            _httpClient = httpClient;
+            _userServices = userServices;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<User>> GetUsers([FromQuery] int page = 1, [FromQuery(Name = "per_page")] int perPage = 6)
+        {
+            var response = await _userServices.GetUsers(page, perPage);
+            if (response is null || response.Data is null || response.Data.Count == 0)
+            {
+                return NotFound("No users found.");
+            }
+
+            return Ok(response);
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostUser([FromBody] User user)
+        public async Task<ActionResult<CreateUserResponse>> PostUser([FromBody] CreateUserRequest request)
         {
-            string baseURL = "https://reqres.in/api/users";
-            UserServices userServices = new UserServices(_httpClient, baseURL);
+            if (request is null)
+            {
+                return BadRequest("Request body is required.");
+            }
 
-            var result = await userServices.PostUser(user);
-            return Ok(result);
+            try
+            {
+                var result = await _userServices.PostUser(request);
+                if (result is null)
+                {
+                    return StatusCode(StatusCodes.Status502BadGateway, "The ReqRes API returned an empty response.");
+                }
+
+                const string baseUrl = "https://reqres.in/api/users";
+                var location = !string.IsNullOrWhiteSpace(result.Id) ? $"{baseUrl}/{result.Id}" : baseUrl;
+                return Created(location, result);
+            }
+            catch (HttpRequestException httpRequestException)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway, httpRequestException.Message);
+            }
         }
     }
 }

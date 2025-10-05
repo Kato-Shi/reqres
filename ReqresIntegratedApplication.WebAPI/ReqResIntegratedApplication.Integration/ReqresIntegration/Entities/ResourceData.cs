@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Entities
 {
-    class ResourceData
+    public class ResourceData
     {
+        [JsonPropertyName("id")]
         public int Id { get; set; }
+
+        [JsonPropertyName("name")]
         public string? Name { get; set; }
+
+        [JsonPropertyName("year")]
         public int Year { get; set; }
+
+        [JsonPropertyName("color")]
         public string? Color { get; set; }
-        public string? Pantone_Value { get; set; }
+
+        [JsonPropertyName("pantone_value")]
+        public string? PantoneValue { get; set; }
     }
 }
