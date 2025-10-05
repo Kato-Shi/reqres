@@ -1,18 +1,21 @@
-﻿using ReqResIntegratedApplication.Integration.ReqresIntegration.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.Net.Http;
+using ReqResIntegratedApplication.Integration.ReqresIntegration.Entities;
 
 namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Manager
 {
-    public class UserManager : GenericManager<User>
+    public class UserManager : GenericManager<User>, IUserManager
     {
-        public UserManager(HttpClient httpClient, string url, User requestBody) : base(httpClient, url, requestBody)
+        private const string UsersEndpoint = "https://reqres.in/api/users";
+
+        public UserManager(HttpClient httpClient) : base(httpClient, UsersEndpoint)
         {
-            _httpClient.DefaultRequestHeaders.Add("x-api-key", "reqres-free-v1");   
+            if (!httpClient.DefaultRequestHeaders.Contains("x-api-key"))
+            {
+                httpClient.DefaultRequestHeaders.Add("x-api-key", "reqres-free-v1");
+            }
         }
+
+        public Task<CreateUserResponse?> CreateUserAsync(CreateUserRequest requestBody) =>
+            Post<CreateUserRequest, CreateUserResponse>(requestBody);
     }
 }
