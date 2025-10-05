@@ -1,25 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Entities
 {
     public class UserData
     {
+        [JsonPropertyName("id")]
         public int Id { get; set; }
+
+        [JsonPropertyName("email")]
         public string? Email { get; set; }
-        public string? First_Name { get; set; }
-        public string? Last_Name { get; set; }
+
+        [JsonPropertyName("first_name")]
+        public string? FirstName { get; set; }
+
+        [JsonPropertyName("last_name")]
+        public string? LastName { get; set; }
+
+        [JsonPropertyName("avatar")]
         public string? Avatar { get; set; }
 
-    public UserData(int id, string email, string first_name, string last_name, string avatar)
+        public UserData()
+        {
+        }
+
+        public UserData(int id, string? email, string? firstName, string? lastName, string? avatar)
         {
             Id = id;
             Email = email;
-            First_Name = first_name;
-            Last_Name = last_name;
+            FirstName = firstName;
+            LastName = lastName;
             Avatar = avatar;
         }
     }
