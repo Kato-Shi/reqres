@@ -3,48 +3,52 @@
   "WorkspaceRootPath": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\entities\\resource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\entities\\resource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\manager\\genericmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\manager\\genericmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\services\\userservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\services\\userservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\manager\\usermanger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\manager\\usermanger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\manager\\usermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\manager\\usermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\manager\\iusermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\manager\\iusermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\manager\\igenericmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\manager\\igenericmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\services\\userservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\services\\userservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\manager\\genericmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\manager\\genericmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FDAAAD56-1B10-49C8-BBC7-AA109A428A5C}|ReqresIntegratedApplication.WebAPI\\ReqresIntegratedApplication.WebAPI.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.webapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FDAAAD56-1B10-49C8-BBC7-AA109A428A5C}|ReqresIntegratedApplication.WebAPI\\ReqresIntegratedApplication.WebAPI.csproj|solutionrelative:reqresintegratedapplication.webapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\entities\\resource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\entities\\resource.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\entities\\userdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\entities\\userdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\entities\\resourcedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\entities\\resourcedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegratedapplication.integration.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegratedapplication.integration.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\manager\\igenericmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\manager\\igenericmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\class1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegration\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegration\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|c:\\users\\rendell angeles\\desktop\\reqres\\reqresintegratedapplication.webapi\\reqresintegratedapplication.integration\\reqresintegratedapplication.integration.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{F9B6522A-2AD4-45BF-B67C-BE1B0F41496D}|ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj|solutionrelative:reqresintegratedapplication.integration\\reqresintegratedapplication.integration.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -62,87 +66,107 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqresIntegratedApplication.WebAPI\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "ReqresIntegratedApplication.WebAPI\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqresIntegratedApplication.WebAPI\\Controllers\\UserController.cs",
+              "RelativeToolTip": "ReqresIntegratedApplication.WebAPI\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-05T00:12:49.64Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "UserManager.cs",
+              "DocumentMoniker": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\UserManager.cs",
+              "RelativeDocumentMoniker": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\UserManager.cs",
+              "ToolTip": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\UserManager.cs",
+              "RelativeToolTip": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\UserManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-04T23:56:00.963Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "UserServices.cs",
               "DocumentMoniker": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Services\\UserServices.cs",
               "RelativeDocumentMoniker": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Services\\UserServices.cs",
               "ToolTip": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Services\\UserServices.cs",
               "RelativeToolTip": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Services\\UserServices.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T17:27:38.156Z"
+              "WhenOpened": "2025-10-04T17:27:38.156Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "UserManger.cs",
-              "DocumentMoniker": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\UserManger.cs",
-              "RelativeDocumentMoniker": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\UserManger.cs",
-              "ToolTip": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\UserManger.cs",
-              "RelativeToolTip": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\UserManger.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T17:26:23.985Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "IUserManager.cs",
               "DocumentMoniker": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\IUserManager.cs",
               "RelativeDocumentMoniker": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\IUserManager.cs",
               "ToolTip": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\IUserManager.cs",
               "RelativeToolTip": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\IUserManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAoAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T17:26:06.376Z"
+              "WhenOpened": "2025-10-04T17:26:06.376Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "IGenericManager.cs",
               "DocumentMoniker": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\IGenericManager.cs",
               "RelativeDocumentMoniker": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\IGenericManager.cs",
               "ToolTip": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\IGenericManager.cs",
               "RelativeToolTip": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\IGenericManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T17:23:08.204Z"
+              "WhenOpened": "2025-10-04T17:23:08.204Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "GenericManager.cs",
               "DocumentMoniker": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\GenericManager.cs",
               "RelativeDocumentMoniker": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\GenericManager.cs",
               "ToolTip": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\GenericManager.cs",
               "RelativeToolTip": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Manager\\GenericManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T17:11:26.043Z"
+              "WhenOpened": "2025-10-04T17:11:26.043Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "UserData.cs",
               "DocumentMoniker": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\UserData.cs",
               "RelativeDocumentMoniker": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\UserData.cs",
               "ToolTip": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\UserData.cs",
               "RelativeToolTip": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\UserData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T17:07:41.643Z"
+              "WhenOpened": "2025-10-04T17:07:41.643Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\User.cs",
               "RelativeDocumentMoniker": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\User.cs",
               "ToolTip": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\User.cs",
               "RelativeToolTip": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T17:07:23.363Z"
+              "WhenOpened": "2025-10-04T17:07:23.363Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -152,26 +176,27 @@
               "RelativeDocumentMoniker": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\ResourceData.cs",
               "ToolTip": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\ResourceData.cs",
               "RelativeToolTip": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\ResourceData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T17:07:02.624Z"
+              "WhenOpened": "2025-10-04T17:07:02.624Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "Resource.cs",
               "DocumentMoniker": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\Resource.cs",
               "RelativeDocumentMoniker": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\Resource.cs",
               "ToolTip": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\Resource.cs",
               "RelativeToolTip": "ReqResIntegratedApplication.Integration\\ReqresIntegration\\Entities\\Resource.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBAAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-04T16:57:15.489Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "ReqResIntegratedApplication.Integration.csproj",
               "DocumentMoniker": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj",
               "RelativeDocumentMoniker": "ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj",
@@ -183,7 +208,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 5,
               "Title": "Class1.cs",
               "DocumentMoniker": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\Class1.cs",
               "RelativeDocumentMoniker": "ReqResIntegratedApplication.Integration\\Class1.cs",
@@ -191,7 +216,8 @@
               "RelativeToolTip": "ReqResIntegratedApplication.Integration\\Class1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-04T16:48:35.651Z"
+              "WhenOpened": "2025-10-04T16:48:35.651Z",
+              "EditorCaption": ""
             }
           ]
         }

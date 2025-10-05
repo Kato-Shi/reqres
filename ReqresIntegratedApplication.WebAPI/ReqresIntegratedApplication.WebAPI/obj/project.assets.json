@@ -88,6 +88,16 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "ReqResIntegratedApplication.Integration/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/ReqResIntegratedApplication.Integration.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ReqResIntegratedApplication.Integration.dll": {}
+        }
       }
     }
   },
@@ -439,10 +449,16 @@
         "swashbuckle.aspnetcore.swaggerui.6.6.2.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "ReqResIntegratedApplication.Integration/1.0.0": {
+      "type": "project",
+      "path": "../ReqResIntegratedApplication.Integration/ReqResIntegratedApplication.Integration.csproj",
+      "msbuildProject": "../ReqResIntegratedApplication.Integration/ReqResIntegratedApplication.Integration.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "ReqResIntegratedApplication.Integration >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.6.2"
     ]
   },
@@ -473,7 +489,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj": {
+              "projectPath": "C:\\Users\\Rendell Angeles\\Desktop\\reqres\\ReqresIntegratedApplication.WebAPI\\ReqResIntegratedApplication.Integration\\ReqResIntegratedApplication.Integration.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
