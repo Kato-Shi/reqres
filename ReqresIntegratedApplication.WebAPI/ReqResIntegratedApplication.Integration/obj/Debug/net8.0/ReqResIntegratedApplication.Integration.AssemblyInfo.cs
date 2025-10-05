@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ReqResIntegratedApplication.Integration")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71880cb78e1799ab0805848db3ecb10c867fe561")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+04fa72caacb9e76462d008e5f04093c152f92f36")]
 [assembly: System.Reflection.AssemblyProductAttribute("ReqResIntegratedApplication.Integration")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ReqResIntegratedApplication.Integration")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
