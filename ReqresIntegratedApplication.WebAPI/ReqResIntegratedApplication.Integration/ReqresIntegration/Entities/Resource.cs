@@ -1,19 +1,23 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Entities
 {
-   public class Resource
+    public class Resource
     {
+        [JsonPropertyName("page")]
         public int Page { get; set; }
-        public int perPage { get; set; }
+
+        [JsonPropertyName("per_page")]
+        public int PerPage { get; set; }
+
+        [JsonPropertyName("total")]
         public int Total { get; set; }
 
+        [JsonPropertyName("total_pages")]
         public int TotalPages { get; set; }
 
+        [JsonPropertyName("data")]
         public List<ResourceData>? Data { get; set; }
     }
 }
