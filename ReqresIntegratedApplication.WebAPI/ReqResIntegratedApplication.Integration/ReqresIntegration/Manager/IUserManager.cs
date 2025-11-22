@@ -1,14 +1,10 @@
-﻿using ReqResIntegratedApplication.Integration.ReqresIntegration.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using ReqResIntegratedApplication.Integration.ReqresIntegration.Entities;
 
 namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Manager
 {
-    
-    public  IUserManager : IGenericManager<User>
+    public interface IUserManager : IGenericManager<User>
     {
+        Task<CreateUserResponse?> CreateUserAsync(CreateUserRequest requestBody);
     }
 }
