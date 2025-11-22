@@ -11,8 +11,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<IUserManager, UserManager>();
+builder.Services.AddHttpClient<ReqResClient>();
+
 builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<TeamShiftDashboardService>();
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<EmployeeService>();
+builder.Services.AddScoped<ResourceService>();
+builder.Services.AddScoped<ClerkService>();
 
 var app = builder.Build();
 
