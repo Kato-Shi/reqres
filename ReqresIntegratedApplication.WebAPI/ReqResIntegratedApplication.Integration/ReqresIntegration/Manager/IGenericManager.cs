@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using ReqResIntegratedApplication.Integration.ReqresIntegration.Entities;
-
-
-
 
 namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Manager
 {
-  public interface IGenericManager<T> where T : class
+    public interface IGenericManager<T> where T : class
     {
-        Task<T> Get(int id);
-        Task<List<T>> GetAll();
-        Task<T> Post();
+        Task<T?> Get(int id);
+        Task<T?> GetAll(int page = 1, int perPage = 6);
+        Task<TResult?> Post<TRequest, TResult>(TRequest requestBody)
+            where TRequest : class
+            where TResult : class;
     }
 }
