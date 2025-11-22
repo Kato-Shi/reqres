@@ -1,26 +1,35 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Entities
 {
-    class User
+    public class User
     {
+        [JsonPropertyName("page")]
         public int Page { get; set; }
-        public int perPage { get; set; }
 
+        [JsonPropertyName("per_page")]
+        public int PerPage { get; set; }
+
+        [JsonPropertyName("total")]
         public int Total { get; set; }
+
+        [JsonPropertyName("total_pages")]
         public int TotalPages { get; set; }
+
+        [JsonPropertyName("data")]
         public List<UserData>? Data { get; set; }
-         
-        public User(int page, int perpage, int total, int totalpage, List<UserData> data)
+
+        public User()
+        {
+        }
+
+        public User(int page, int perPage, int total, int totalPages, List<UserData>? data)
         {
             Page = page;
-            perPage = perpage;
+            PerPage = perPage;
             Total = total;
-            TotalPages = totalpage;
+            TotalPages = totalPages;
             Data = data;
         }
     }

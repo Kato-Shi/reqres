@@ -1,21 +1,30 @@
-﻿using ReqResIntegratedApplication.Integration.ReqresIntegration.Entities;
-using ReqResIntegratedApplication.Integration.ReqresIntegration.Manager;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using ReqResIntegratedApplication.Integration.ReqresIntegration.Entities;
+using ReqResIntegratedApplication.Integration.ReqresIntegration.Manager;
 
 namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Services
 {
-    class UserServices
+    public class UserServices
     {
-        public async Task<User> PostUser(User user)
+        private readonly IUserManager _userManager;
+
+        public UserServices(IUserManager userManager)
         {
-            User requestBody = new User(user.Page, user.perPage, user.Total, user.TotalPages, user.Data);
-            UserManager userManager = new UserManager(httpClient, _baseURL, requestBody);
-            return await userManager.Post();
+            _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
+        }
+
+        public Task<User?> GetUsers(int page = 1, int perPage = 6) =>
+            _userManager.GetAll(page, perPage);
+
+        public Task<CreateUserResponse?> PostUser(CreateUserRequest request)
+        {
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            return _userManager.CreateUserAsync(request);
         }
     }
 }
