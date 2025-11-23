@@ -13,6 +13,21 @@ builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<IUserManager, UserManager>();
 builder.Services.AddHttpClient<ReqResClient>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Frontend", policy =>
+    {
+        policy
+            .WithOrigins(
+                "http://localhost:5173",
+                "http://127.0.0.1:5173",
+                "http://localhost:4173",
+                "http://127.0.0.1:4173")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<WarehouseDashboardService>();
 builder.Services.AddScoped<AuthService>();
@@ -28,6 +43,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("Frontend");
 
 app.UseHttpsRedirection();
 
