@@ -29,12 +29,29 @@ namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Services
             }
         }
 
-        public Task<LoginResponse?> LoginAsync(LoginRequest request)
+        public async Task<LoginResponse?> LoginAsync(LoginRequest request)
         {
-            // The login endpoint can respond with 400/401 when credentials are wrong.
-            // We tolerate non-success here so the caller can surface a friendly message
-            // instead of throwing a HttpRequestException that bubbles to the UI.
-            return PostAsync<LoginRequest, LoginResponse>("login", request, ensureSuccess: false);
+            if (request is null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            using var content = BuildJsonContent(request);
+            var response = await _httpClient.PostAsync("login", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<LoginResponse>(CaseInsensitive);
+            }
+
+            // Capture the status code and body so upstream callers can explain what happened
+            // (for example, corporate proxies returning 401/403) instead of throwing.
+            var body = await response.Content.ReadAsStringAsync();
+            return new LoginResponse
+            {
+                Error = $"ReqRes login returned {(int)response.StatusCode} {response.ReasonPhrase}. Body: {body}" ??
+                        "Login failed."
+            };
         }
 
         public Task<User?> GetUsersAsync(int page, int perPage) =>

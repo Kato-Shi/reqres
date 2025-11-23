@@ -18,11 +18,18 @@ namespace ReqresIntegratedApplication.WebAPI.Services
             _client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
-        public async Task<string?> LoginAsync(string email, string password)
+        public async Task<(string? Token, string? Error)> LoginAsync(string email, string password)
         {
             var response = await _client.LoginAsync(new LoginRequest(email, password));
-            Session.CurrentToken = response?.Token;
-            return response?.Token;
+
+            if (!string.IsNullOrWhiteSpace(response?.Token))
+            {
+                Session.CurrentToken = response.Token;
+                return (response.Token, null);
+            }
+
+            Session.Clear();
+            return (null, response?.Error ?? "Login failed. Please check your email and password.");
         }
 
         public void Logout()

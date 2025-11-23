@@ -25,10 +25,13 @@ namespace ReqresIntegratedApplication.WebAPI.Controllers
                 return ValidationProblem(ModelState);
             }
 
-            var token = await _authService.LoginAsync(request.Email, request.Password);
+            var (token, error) = await _authService.LoginAsync(request.Email, request.Password);
             if (string.IsNullOrWhiteSpace(token))
             {
-                return Unauthorized("Login failed. Please check your email and password.");
+                var message = string.IsNullOrWhiteSpace(error)
+                    ? "Login failed. Please check your email and password."
+                    : error;
+                return Unauthorized(message);
             }
 
             return Ok(new { token });

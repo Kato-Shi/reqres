@@ -45,4 +45,5 @@ To produce a static bundle, run `npm run build` inside `warehouse-frontend/`; th
 
 ## Notes
 - The API honors the ReqRes demo login credentials: `eve.holt@reqres.in` / `cityslicka`.
+- If you encounter a `401/403` on login, the `/api/auth/login` endpoint now echoes the upstream status code and body so you can see whether a proxy or firewall blocked the call to `reqres.in`.
 - Because assignment data is in-memory, restarting the API clears promotions/assignments; user/resource data is always refreshed from ReqRes.
