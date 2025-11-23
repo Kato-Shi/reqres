@@ -55,12 +55,13 @@ namespace ReqresIntegratedApplication.WebAPI.Services
             var created = await _client.CreateUserAsync(request);
             if (created is not null)
             {
+                var (firstName, lastName) = SplitName(request.Name);
                 var synthetic = new UserData
                 {
                     Id = int.TryParse(created.Id, out var newId) ? newId : _localUsers.Keys.DefaultIfEmpty().Max() + 1,
                     Email = $"{request.Name.Replace(" ", ".").ToLower()}@reqres.in",
-                    FirstName = request.Name,
-                    LastName = request.Job,
+                    FirstName = firstName,
+                    LastName = lastName,
                     Avatar = null
                 };
 
@@ -83,9 +84,16 @@ namespace ReqresIntegratedApplication.WebAPI.Services
                     existing = new UserData { Id = id };
                 }
 
-                existing.FirstName = request.Name;
-                existing.LastName = existing.LastName ?? string.Empty;
-                existing.Email = existing.Email ?? string.Empty;
+                if (!string.IsNullOrWhiteSpace(request.Name))
+                {
+                    var (firstName, lastName) = SplitName(request.Name);
+                    existing.FirstName = firstName;
+                    existing.LastName = lastName;
+                }
+
+                existing.FirstName ??= string.Empty;
+                existing.LastName ??= string.Empty;
+                existing.Email ??= string.Empty;
                 existing.Avatar = existing.Avatar;
                 _localUsers[id] = existing;
             }
@@ -93,6 +101,30 @@ namespace ReqresIntegratedApplication.WebAPI.Services
             return response;
         }
 
+        public async Task<bool> DeleteUserAsync(int id)
+        {
+            var deleted = await _client.DeleteUserAsync(id);
+            if (deleted)
+            {
+                _localUsers.Remove(id);
+            }
+
+            return deleted;
+        }
+
         public IReadOnlyCollection<UserData> GetLocalUsers() => _localUsers.Values.ToList();
+
+        private static (string FirstName, string LastName) SplitName(string name)
+        {
+            var parts = name?.Split(' ', StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
+            if (parts.Length == 0)
+            {
+                return (string.Empty, string.Empty);
+            }
+
+            var firstName = parts[0];
+            var lastName = parts.Length > 1 ? string.Join(" ", parts.Skip(1)) : string.Empty;
+            return (firstName, lastName);
+        }
     }
 }

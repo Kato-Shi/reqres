@@ -49,6 +49,12 @@ namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Services
         public Task<UpdateUserResponse?> PatchUserAsync(int id, UpdateUserRequest request) =>
             SendUserUpdateAsync(HttpMethod.Patch, id, request);
 
+        public async Task<bool> DeleteUserAsync(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"users/{id}");
+            return response.IsSuccessStatusCode;
+        }
+
         public Task<Resource?> GetResourcesAsync(int page, int perPage) =>
             _httpClient.GetFromJsonAsync<Resource>($"unknown?page={page}&per_page={perPage}");
 

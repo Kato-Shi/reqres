@@ -1,13 +1,9 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace ReqresIntegratedApplication.WebAPI.Models
 {
     public class UserUpdateDto
     {
-        [Required]
-        public string Name { get; set; } = string.Empty;
+        public string? Name { get; set; }
 
-        [Required]
-        public string Job { get; set; } = string.Empty;
+        public string? Job { get; set; }
     }
 }
