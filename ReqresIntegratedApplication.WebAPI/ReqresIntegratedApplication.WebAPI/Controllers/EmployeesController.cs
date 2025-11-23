@@ -46,6 +46,11 @@ namespace ReqresIntegratedApplication.WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<UpdateUserResponse?>> Put(int id, [FromBody] UserUpdateDto request)
         {
+            if (string.IsNullOrWhiteSpace(request.Name) || string.IsNullOrWhiteSpace(request.Job))
+            {
+                return BadRequest("Both name and job are required for a full update.");
+            }
+
             var response = await _employees.UpdateUserAsync(id, new UpdateUserRequest(request.Name, request.Job), false);
             return response is null ? StatusCode(502, "ReqRes did not return an update payload.") : Ok(response);
         }
@@ -53,8 +58,20 @@ namespace ReqresIntegratedApplication.WebAPI.Controllers
         [HttpPatch("{id}")]
         public async Task<ActionResult<UpdateUserResponse?>> Patch(int id, [FromBody] UserUpdateDto request)
         {
-            var response = await _employees.UpdateUserAsync(id, new UpdateUserRequest(request.Name, request.Job), true);
+            if (string.IsNullOrWhiteSpace(request.Name) && string.IsNullOrWhiteSpace(request.Job))
+            {
+                return BadRequest("Provide at least a name or job to update.");
+            }
+
+            var response = await _employees.UpdateUserAsync(id, new UpdateUserRequest(request.Name ?? string.Empty, request.Job ?? string.Empty), true);
             return response is null ? StatusCode(502, "ReqRes did not return an update payload.") : Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deleted = await _employees.DeleteUserAsync(id);
+            return deleted ? NoContent() : StatusCode(502, "ReqRes did not confirm the deletion.");
         }
 
         [HttpGet("cache")]
