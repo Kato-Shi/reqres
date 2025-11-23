@@ -18,5 +18,11 @@ namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Entities
 
         [JsonPropertyName("pantone_value")]
         public string? PantoneValue { get; set; }
+
+        /// <summary>
+        /// Locally managed quantity to support warehouse inventory scenarios.
+        /// </summary>
+        [JsonPropertyName("quantity")]
+        public int Quantity { get; set; }
     }
 }

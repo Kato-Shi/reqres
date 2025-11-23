@@ -11,7 +11,8 @@ function ResourcesPanel({ onResourcesLoaded }) {
     name: '',
     color: '#0099cc',
     year: new Date().getFullYear(),
-    pantoneValue: ''
+    pantoneValue: '',
+    quantity: 0
   });
 
   const resources = useMemo(() => resourcePage?.data || [], [resourcePage]);
@@ -42,7 +43,8 @@ function ResourcesPanel({ onResourcesLoaded }) {
         name: detail.name || '',
         color: detail.color || '#0099cc',
         year: detail.year || new Date().getFullYear(),
-        pantoneValue: detail.pantone_value || ''
+        pantoneValue: detail.pantone_value || '',
+        quantity: detail.quantity ?? 0
       });
     } catch (error) {
       setStatus(error.message);
@@ -60,13 +62,15 @@ function ResourcesPanel({ onResourcesLoaded }) {
         name: form.name,
         color: form.color,
         year: Number(form.year) || 0,
-        pantoneValue: form.pantoneValue
+        pantoneValue: form.pantoneValue,
+        quantity: Number(form.quantity) || 0
       });
       setForm({
         name: '',
         color: '#0099cc',
         year: new Date().getFullYear(),
-        pantoneValue: ''
+        pantoneValue: '',
+        quantity: 0
       });
       await loadResources();
       setStatus('Resource added locally.');
@@ -87,7 +91,8 @@ function ResourcesPanel({ onResourcesLoaded }) {
         name: form.name,
         color: form.color,
         year: Number(form.year) || 0,
-        pantoneValue: form.pantoneValue
+        pantoneValue: form.pantoneValue,
+        quantity: Number(form.quantity) || 0
       });
       setSelected(updated);
       await loadResources();
@@ -123,12 +128,14 @@ function ResourcesPanel({ onResourcesLoaded }) {
               <div>ID</div>
               <div>Name</div>
               <div>Color</div>
+              <div>Qty</div>
             </div>
             {resources.map((r) => (
               <button key={r.id} className={`table-row ${selected?.id === r.id ? 'active' : ''}`} style={{ borderLeftColor: r.color }} onClick={() => handleSelect(r.id)}>
                 <div>#{r.id}</div>
                 <div>{r.name}</div>
                 <div>{r.color}</div>
+                <div>{r.quantity ?? 0}</div>
               </button>
             ))}
           </div>
@@ -150,6 +157,9 @@ function ResourcesPanel({ onResourcesLoaded }) {
             </label>
             <label className="detail-row">Pantone
               <input value={form.pantoneValue} onChange={(e) => handleFormChange('pantoneValue', e.target.value)} placeholder="14-4121" />
+            </label>
+            <label className="detail-row">Quantity
+              <input type="number" min="0" value={form.quantity} onChange={(e) => handleFormChange('quantity', e.target.value)} />
             </label>
             <div className="button-row">
               <button type="button" onClick={handleCreate}>Add Resource</button>

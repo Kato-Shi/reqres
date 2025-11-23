@@ -19,9 +19,9 @@ namespace ReqresIntegratedApplication.WebAPI.Services
         private int _nextId = 204;
         private static readonly ResourceData[] DemoResources =
         {
-            new() { Id = 201, Name = "Demo Widget", Color = "#0099cc", Year = 2024, PantoneValue = "14-4121" },
-            new() { Id = 202, Name = "Demo Crate", Color = "#cc3300", Year = 2023, PantoneValue = "18-1561" },
-            new() { Id = 203, Name = "Demo Pallet", Color = "#669900", Year = 2022, PantoneValue = "16-0532" }
+            new() { Id = 201, Name = "Demo Widget", Color = "#0099cc", Year = 2024, PantoneValue = "14-4121", Quantity = 12 },
+            new() { Id = 202, Name = "Demo Crate", Color = "#cc3300", Year = 2023, PantoneValue = "18-1561", Quantity = 30 },
+            new() { Id = 203, Name = "Demo Pallet", Color = "#669900", Year = 2022, PantoneValue = "16-0532", Quantity = 8 }
         };
 
         public ResourceService(ReqResClient client)
@@ -34,21 +34,13 @@ namespace ReqresIntegratedApplication.WebAPI.Services
             try
             {
                 _lastPage = await _client.GetResourcesAsync(page, perPage);
-                if (_lastPage?.Data is { Count: > 0 })
-                {
-                    foreach (var resource in _lastPage.Data)
-                    {
-                        _resourceCache[resource.Id] = resource;
-                        _nextId = Math.Max(_nextId, resource.Id + 1);
-                    }
-                }
-
-                return _lastPage ?? BuildLocalResourcePage();
+                SyncCacheWithPage(_lastPage);
             }
             catch (HttpRequestException)
             {
-                return BuildLocalResourcePage();
             }
+
+            return BuildLocalResourcePage(page, perPage);
         }
 
         public async Task<ResourceData?> GetResourceAsync(int id)
@@ -63,6 +55,11 @@ namespace ReqresIntegratedApplication.WebAPI.Services
                 var resource = await _client.GetResourceAsync(id);
                 if (resource is not null)
                 {
+                    if (_resourceCache.TryGetValue(id, out var existing) && existing.Quantity > 0)
+                    {
+                        resource.Quantity = existing.Quantity;
+                    }
+
                     _resourceCache[id] = resource;
                 }
 
@@ -79,6 +76,11 @@ namespace ReqresIntegratedApplication.WebAPI.Services
         public ResourceData AddResource(ResourceData resource)
         {
             resource.Id = resource.Id == 0 ? _nextId++ : resource.Id;
+            if (resource.Quantity < 0)
+            {
+                resource.Quantity = 0;
+            }
+
             _resourceCache[resource.Id] = resource;
             return resource;
         }
@@ -96,11 +98,31 @@ namespace ReqresIntegratedApplication.WebAPI.Services
             existing.Color = updated.Color;
             existing.Year = updated.Year;
             existing.PantoneValue = updated.PantoneValue;
+            existing.Quantity = Math.Max(0, updated.Quantity);
 
             return existing;
         }
 
-        private Resource? BuildLocalResourcePage()
+        private void SyncCacheWithPage(Resource? page)
+        {
+            if (page?.Data is not { Count: > 0 })
+            {
+                return;
+            }
+
+            foreach (var resource in page.Data)
+            {
+                if (_resourceCache.TryGetValue(resource.Id, out var existing) && existing.Quantity > 0)
+                {
+                    resource.Quantity = existing.Quantity;
+                }
+
+                _resourceCache[resource.Id] = resource;
+                _nextId = Math.Max(_nextId, resource.Id + 1);
+            }
+        }
+
+        private Resource? BuildLocalResourcePage(int page, int perPage)
         {
             if (_resourceCache.Count == 0)
             {
@@ -111,13 +133,22 @@ namespace ReqresIntegratedApplication.WebAPI.Services
                 }
             }
 
+            var ordered = _resourceCache.Values
+                .OrderByDescending(r => r.Id)
+                .ToList();
+
+            var pageData = ordered
+                .Skip((page - 1) * perPage)
+                .Take(perPage)
+                .ToList();
+
             return new Resource
             {
-                Page = 1,
-                PerPage = _resourceCache.Count,
-                Total = _resourceCache.Count,
-                TotalPages = 1,
-                Data = _resourceCache.Values.ToList()
+                Page = page,
+                PerPage = perPage,
+                Total = ordered.Count,
+                TotalPages = (int)Math.Ceiling((double)ordered.Count / perPage),
+                Data = pageData
             };
         }
 

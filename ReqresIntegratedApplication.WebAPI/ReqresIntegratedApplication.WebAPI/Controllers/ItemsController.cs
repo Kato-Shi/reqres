@@ -30,7 +30,8 @@ namespace ReqresIntegratedApplication.WebAPI.Controllers
                 Name = request.Name,
                 Color = request.Color,
                 Year = request.Year,
-                PantoneValue = request.PantoneValue
+                PantoneValue = request.PantoneValue,
+                Quantity = request.Quantity
             };
 
             var created = _resources.AddResource(resource);
@@ -60,7 +61,8 @@ namespace ReqresIntegratedApplication.WebAPI.Controllers
                 Name = request.Name,
                 Color = request.Color,
                 Year = request.Year,
-                PantoneValue = request.PantoneValue
+                PantoneValue = request.PantoneValue,
+                Quantity = request.Quantity
             };
 
             var result = _resources.UpdateResource(id, update);

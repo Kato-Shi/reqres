@@ -9,5 +9,6 @@ namespace ReqresIntegratedApplication.WebAPI.Models
         public string Color { get; set; } = string.Empty;
         public int Year { get; set; }
         public string PantoneValue { get; set; } = string.Empty;
+        public int Quantity { get; set; }
     }
 }
