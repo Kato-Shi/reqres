@@ -1,6 +1,11 @@
 import { clearSession, setToken as persistToken } from './session';
 
-const API_BASE = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5135/api').replace(/\/$/, '');
+// Prefer an explicit base URL, then fall back to the current host (useful when the
+// SPA is served by the ASP.NET site), and finally default to the HTTPS profile
+// Visual Studio uses (https://localhost:7216).
+const explicitBase = import.meta.env.VITE_API_BASE_URL;
+const sameHostBase = typeof window !== 'undefined' ? `${window.location.origin}/api` : null;
+const API_BASE = (explicitBase || sameHostBase || 'https://localhost:7216/api').replace(/\/$/, '');
 let authToken = null;
 
 function buildHeaders(extra = {}) {

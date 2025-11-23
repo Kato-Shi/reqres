@@ -8,8 +8,9 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:5135',
-        changeOrigin: true
+        target: 'https://localhost:7216',
+        changeOrigin: true,
+        secure: false // allow self-signed dev certificate from Visual Studio
       }
     }
   }

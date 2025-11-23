@@ -22,7 +22,7 @@ A lightweight warehouse management sample that pairs an ASP.NET Core API with a 
    ```bash
    npm run dev
    ```
-   Vite proxies `/api` to `http://localhost:5135`, so no manual CORS tweaks are needed. If you host the API elsewhere, set `VITE_API_BASE_URL` in a `.env` file (e.g., `VITE_API_BASE_URL=http://localhost:5135/api`).
+   Vite now proxies `/api` to the Visual Studio HTTPS profile (`https://localhost:7216`) and disables certificate verification so the self-signed dev cert is accepted. If you run the API on a different port or scheme, set `VITE_API_BASE_URL` in a `.env` file (e.g., `VITE_API_BASE_URL=http://localhost:5135/api`).
 
 ## One-click run from Visual Studio
 You can launch the API directly with the green **Run** button in Visual Studio:
