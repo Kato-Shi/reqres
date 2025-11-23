@@ -24,6 +24,11 @@ A lightweight warehouse management sample that pairs an ASP.NET Core API with a 
    ```
    Vite now proxies `/api` to the Visual Studio HTTPS profile (`https://localhost:7216`) and disables certificate verification so the self-signed dev cert is accepted. If you run the API on a different port or scheme, set `VITE_API_BASE_URL` in a `.env` file (e.g., `VITE_API_BASE_URL=http://localhost:5135/api`).
 
+4. **Log in from the SPA**:
+   - When the SPA loads, you will see a login form.
+   - Use the demo credentials `eve.holt@reqres.in` / `cityslicka`. The login is handled locally (no ReqRes call) and stores a lightweight session token in `localStorage` so you stay signed in across refreshes.
+   - Use the **Logout** button in the header to clear the session and return to the login screen.
+
 ## One-click run from Visual Studio
 You can launch the API directly with the green **Run** button in Visual Studio:
 

@@ -1,6 +1,6 @@
 # TeamShift Lite Warehouse Frontend
 
-A lightweight React single-page app that sits on top of the existing ASP.NET Core warehouse API. It calls ReqRes-backed endpoints directly (no authentication needed) for GET/POST/PUT/PATCH flows covering employees, resources, and warehouse assignments without any database.
+A lightweight React single-page app that sits on top of the existing ASP.NET Core warehouse API. It calls ReqRes-backed endpoints directly for GET/POST/PUT/PATCH flows covering employees, resources, and warehouse assignments without any database. A simple in-app login gate keeps the demo credentials front-and-center while avoiding upstream 401s from ReqRes.
 
 ## Getting started
 
@@ -20,6 +20,11 @@ A lightweight React single-page app that sits on top of the existing ASP.NET Cor
    npm run dev
    ```
    Vite proxies `/api/*` to `http://localhost:5135` so calls avoid CORS during development.
+
+4. **Log in with the demo credentials**:
+   - Open the dev server (typically `http://localhost:5173`).
+   - Enter `eve.holt@reqres.in` with password `cityslicka` on the login page. The check is local—no ReqRes request is sent—so you can always sign in and then exercise the rest of the dashboard.
+   - Use the header **Logout** button to clear the session and return to the login screen.
 
 4. **Build for production** (optional):
    ```bash
