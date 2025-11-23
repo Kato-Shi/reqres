@@ -56,12 +56,7 @@ namespace ReqresIntegratedApplication.WebAPI.Services
                 var resource = await _client.GetResourceAsync(id);
                 if (resource is not null)
                 {
-                    if (_resourceCache.TryGetValue(id, out var existing) && existing.Quantity > 0)
-                    {
-                        resource.Quantity = existing.Quantity;
-                    }
-
-                    _resourceCache[id] = resource;
+                    _resourceCache[id] = MergeResource(resource, resource.Id);
                 }
 
                 return resource ?? GetLocalOrDemoResource(id);
@@ -113,14 +108,27 @@ namespace ReqresIntegratedApplication.WebAPI.Services
 
             foreach (var resource in page.Data)
             {
-                if (_resourceCache.TryGetValue(resource.Id, out var existing) && existing.Quantity > 0)
-                {
-                    resource.Quantity = existing.Quantity;
-                }
-
-                _resourceCache[resource.Id] = resource;
+                _resourceCache[resource.Id] = MergeResource(resource, resource.Id);
                 _nextId = Math.Max(_nextId, resource.Id + 1);
             }
+        }
+
+        private ResourceData MergeResource(ResourceData incoming, int id)
+        {
+            if (_resourceCache.TryGetValue(id, out var existing))
+            {
+                return new ResourceData
+                {
+                    Id = id,
+                    Name = string.IsNullOrWhiteSpace(existing.Name) ? incoming.Name : existing.Name,
+                    Color = string.IsNullOrWhiteSpace(existing.Color) ? incoming.Color : existing.Color,
+                    Year = existing.Year != 0 ? existing.Year : incoming.Year,
+                    PantoneValue = string.IsNullOrWhiteSpace(existing.PantoneValue) ? incoming.PantoneValue : existing.PantoneValue,
+                    Quantity = existing.Quantity
+                };
+            }
+
+            return incoming;
         }
 
         private Resource? BuildLocalResourcePage(int page, int perPage)
