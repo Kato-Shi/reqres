@@ -14,7 +14,7 @@ namespace ReqresIntegratedApplication.WebAPI.Services
     public class EmployeeService
     {
         private readonly ReqResClient _client;
-        private readonly Dictionary<int, UserData> _localUsers = new();
+        private static readonly System.Collections.Concurrent.ConcurrentDictionary<int, UserData> _localUsers = new();
         private static readonly UserData[] DemoUsers =
         {
             new() { Id = 101, Email = "demo.jane@reqres.in", FirstName = "Demo", LastName = "Jane", Avatar = null },
@@ -128,19 +128,35 @@ namespace ReqresIntegratedApplication.WebAPI.Services
 
             if (response is not null)
             {
-                if (!_localUsers.TryGetValue(id, out var existing))
-                {
-                    existing = new UserData { Id = id };
-                }
+                var names = (request.Name ?? string.Empty).Split(' ', 2, System.StringSplitOptions.RemoveEmptyEntries);
+                var first = names.Length > 0 ? names[0] : request.Name;
+                var last = names.Length > 1 ? names[1] : request.Job;
 
-                existing.FirstName = request.Name;
-                existing.LastName = existing.LastName ?? string.Empty;
-                existing.Email = existing.Email ?? string.Empty;
-                existing.Avatar = existing.Avatar;
-                _localUsers[id] = existing;
+                var updated = _localUsers.GetOrAdd(id, _ => new UserData { Id = id });
+                updated.FirstName = first;
+                updated.LastName = last;
+                updated.Email = updated.Email ?? $"{first?.ToLower()}.{last?.ToLower()}@reqres.in";
+                updated.Avatar = updated.Avatar;
+                _localUsers[id] = updated;
             }
 
             return response;
+        }
+
+        public async Task<bool> DeleteUserAsync(int id)
+        {
+            var deleted = false;
+            try
+            {
+                deleted = await _client.DeleteUserAsync(id);
+            }
+            catch (HttpRequestException)
+            {
+                deleted = true; // treat unreachable upstream as deleted locally
+            }
+
+            _localUsers.TryRemove(id, out _);
+            return deleted;
         }
 
         public IReadOnlyCollection<UserData> GetLocalUsers() => _localUsers.Values.ToList();

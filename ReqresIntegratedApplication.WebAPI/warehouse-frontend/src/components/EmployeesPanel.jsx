@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import {
-  createEmployee,
-  getEmployee,
-  getEmployees,
-  patchEmployee,
-  updateEmployee
-} from '../services/apiClient';
+  import {
+    createEmployee,
+    getEmployee,
+    getEmployees,
+    patchEmployee,
+    updateEmployee,
+    deleteEmployee
+  } from '../services/apiClient';
 
 function EmployeesPanel({ onUsersLoaded }) {
   const [page, setPage] = useState(1);
@@ -88,6 +89,19 @@ function EmployeesPanel({ onUsersLoaded }) {
     }
   };
 
+  const handleDelete = async () => {
+    if (!selectedUser) return;
+    setStatus('');
+    try {
+      await deleteEmployee(selectedUser.id);
+      setStatus(`Deleted user #${selectedUser.id}`);
+      setSelectedUser(null);
+      await loadUsers();
+    } catch (error) {
+      setStatus(error.message);
+    }
+  };
+
   return (
     <div className="panel">
       <h2>Employees</h2>
@@ -147,6 +161,7 @@ function EmployeesPanel({ onUsersLoaded }) {
               <div className="button-row">
                 <button type="button" className="primary" onClick={handlePut}>Save (PUT)</button>
                 <button type="button" onClick={handlePatch}>Quick Update (PATCH)</button>
+                <button type="button" className="danger" onClick={handleDelete}>Delete</button>
               </div>
             </div>
           ) : (

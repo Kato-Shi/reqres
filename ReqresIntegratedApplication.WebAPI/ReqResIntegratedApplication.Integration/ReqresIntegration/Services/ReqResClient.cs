@@ -69,6 +69,18 @@ namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Services
         public Task<UpdateUserResponse?> PatchUserAsync(int id, UpdateUserRequest request) =>
             SendUserUpdateAsync(HttpMethod.Patch, id, request);
 
+        public async Task<bool> DeleteUserAsync(int id)
+        {
+            var response = await _httpClient.DeleteAsync($"users/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+
+            // Treat ReqRes not-found or proxy blocks as failures but allow callers to fall back locally.
+            return false;
+        }
+
         public Task<Resource?> GetResourcesAsync(int page, int perPage) =>
             _httpClient.GetFromJsonAsync<Resource>($"unknown?page={page}&per_page={perPage}");
 

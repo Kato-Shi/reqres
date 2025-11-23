@@ -57,6 +57,13 @@ namespace ReqresIntegratedApplication.WebAPI.Controllers
             return response is null ? StatusCode(502, "ReqRes did not return an update payload.") : Ok(response);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deleted = await _employees.DeleteUserAsync(id);
+            return deleted ? NoContent() : StatusCode(502, "ReqRes did not delete the user.");
+        }
+
         [HttpGet("cache")]
         public ActionResult GetCache()
         {

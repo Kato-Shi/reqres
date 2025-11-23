@@ -117,6 +117,12 @@ export async function patchEmployee(id, payload) {
   });
 }
 
+export async function deleteEmployee(id) {
+  return request(`/employees/${id}`, {
+    method: 'DELETE'
+  });
+}
+
 export async function getResources(page = 1, perPage = 6) {
   return request(`/items?page=${page}&per_page=${perPage}`);
 }
