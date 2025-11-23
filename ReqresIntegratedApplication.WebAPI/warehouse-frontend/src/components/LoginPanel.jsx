@@ -26,7 +26,10 @@ function LoginPanel({ onAuthenticated }) {
   return (
     <div className="panel">
       <h2>Warehouse Login</h2>
-      <p>Use the ReqRes demo account to sign in and explore the dashboard.</p>
+      <p>
+        Sign in with the built-in demo account (no external call is made). This sidesteps
+        ReqRes 401s while keeping the rest of the API live against reqres.in.
+      </p>
       <form onSubmit={handleSubmit} className="form">
         <label>
           Email
@@ -52,7 +55,10 @@ function LoginPanel({ onAuthenticated }) {
         {status && <div className="status error">{status}</div>}
       </form>
       <div className="helper">
-        <p><strong>Why login?</strong> The token is stored in memory to mimic session handling, even though ReqRes does not enforce it.</p>
+        <p>
+          <strong>Why login?</strong> The API validates the credentials locally and returns a demo token so
+          subsequent requests stay consistent. No data is stored beyond this session.
+        </p>
       </div>
     </div>
   );

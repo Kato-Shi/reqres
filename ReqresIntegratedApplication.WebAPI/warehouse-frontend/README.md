@@ -1,6 +1,6 @@
 # TeamShift Lite Warehouse Frontend
 
-A lightweight React single-page app that sits on top of the existing ASP.NET Core warehouse API. It exercises ReqRes-backed login plus GET/POST/PUT/PATCH flows for employees, resources, and warehouse assignments without any database.
+A lightweight React single-page app that sits on top of the existing ASP.NET Core warehouse API. It exercises a local demo login (to avoid upstream ReqRes 401s) plus GET/POST/PUT/PATCH flows for employees, resources, and warehouse assignments without any database.
 
 ## Getting started
 
@@ -27,7 +27,7 @@ A lightweight React single-page app that sits on top of the existing ASP.NET Cor
    ```
 
 ## Key screens
-- **Login**: Calls `POST /api/auth/login` with the ReqRes demo credentials and caches the token in memory/localStorage.
+- **Login**: Calls `POST /api/auth/login` with the demo credentials (`eve.holt@reqres.in` / `cityslicka`). The API validates these locally and returns a demo token cached in memory/localStorage.
 - **Dashboard**: Shows the workforce snapshot from `/api/warehouse/workforce-summary` and `/api/warehouse/employees`.
 - **Employees**: Lists, creates (POST), updates (PUT), and patches (PATCH) users via `/api/employees` endpoints, reflecting changes locally.
 - **Resources**: Lists ReqRes `unknown` records via `/api/items` and lets you inspect each item.

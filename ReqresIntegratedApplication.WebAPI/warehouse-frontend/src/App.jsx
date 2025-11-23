@@ -54,7 +54,7 @@ function App() {
         <header className="app-header">
           <div>
             <h1>TeamShift Lite: Warehouse Dashboard</h1>
-            <p>Sign in to exercise the ReqRes login and drive the warehouse workforce screens.</p>
+            <p>Sign in with the local demo credentials to unlock the workforce and inventory screens.</p>
           </div>
         </header>
         <main>
@@ -72,7 +72,10 @@ function App() {
       <header className="app-header">
         <div>
           <h1>TeamShift Lite: Warehouse Dashboard</h1>
-          <p>ReqRes-backed workforce and item management. Login token stored in-memory only.</p>
+          <p>
+            ReqRes-backed workforce and item management. Login is validated locally to avoid external 401s;
+            the token is stored in-memory only.
+          </p>
         </div>
         <div className="nav-actions">
           <button onClick={hydrateDashboard}>Refresh Metrics</button>

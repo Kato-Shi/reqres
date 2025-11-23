@@ -60,6 +60,8 @@ export async function login(email, password) {
     body: JSON.stringify({ email, password })
   });
 
+  // The API performs an in-app credential check to avoid upstream ReqRes 401s.
+  // Persist the returned demo token so other requests stay consistent.
   setToken(payload?.token || null);
   return payload?.token;
 }
