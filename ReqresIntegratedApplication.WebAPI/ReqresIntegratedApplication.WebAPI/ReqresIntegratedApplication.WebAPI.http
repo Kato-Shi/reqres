@@ -4,3 +4,18 @@ GET {{ReqresIntegratedApplication.WebAPI_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+# Login with the ReqRes demo credentials and capture the token.
+POST {{ReqresIntegratedApplication.WebAPI_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "eve.holt@reqres.in",
+  "password": "cityslicka"
+}
+
+###
+
+# Check the in-memory session after logging in.
+GET {{ReqresIntegratedApplication.WebAPI_HostAddress}}/api/auth/session
+

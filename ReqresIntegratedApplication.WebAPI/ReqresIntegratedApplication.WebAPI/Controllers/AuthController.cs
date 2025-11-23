@@ -28,7 +28,7 @@ namespace ReqresIntegratedApplication.WebAPI.Controllers
             var token = await _authService.LoginAsync(request.Email, request.Password);
             if (string.IsNullOrWhiteSpace(token))
             {
-                return Unauthorized("Login failed. Please check your email and password.");
+                return Unauthorized("Login failed. Use the ReqRes demo credentials (eve.holt@reqres.in / cityslicka) or supply valid ReqRes login details.");
             }
 
             return Ok(new { token });

@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using ReqResIntegratedApplication.Integration.ReqresIntegration.Entities;
 using ReqResIntegratedApplication.Integration.ReqresIntegration.Services;
@@ -20,9 +21,17 @@ namespace ReqresIntegratedApplication.WebAPI.Services
 
         public async Task<string?> LoginAsync(string email, string password)
         {
-            var response = await _client.LoginAsync(new LoginRequest(email, password));
-            Session.CurrentToken = response?.Token;
-            return response?.Token;
+            try
+            {
+                var response = await _client.LoginAsync(new LoginRequest(email, password));
+                Session.CurrentToken = response?.Token;
+                return response?.Token;
+            }
+            catch (HttpRequestException)
+            {
+                Session.Clear();
+                return null;
+            }
         }
 
         public void Logout()
