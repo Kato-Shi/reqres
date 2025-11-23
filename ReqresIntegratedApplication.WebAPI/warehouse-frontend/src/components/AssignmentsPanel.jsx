@@ -9,10 +9,17 @@ function AssignmentsPanel({ employees = [], resources = [] }) {
   const [selectedItemIds, setSelectedItemIds] = useState([]);
   const [status, setStatus] = useState('');
 
-  const loadAssociates = async () => {
+  const loadAssociates = async (nextSelectedId) => {
     try {
       const data = await getAssociates();
-      setAssociates(data || []);
+      const list = data || [];
+      setAssociates(list);
+      const fallbackId = nextSelectedId ?? selectedAssociateId;
+      if (!fallbackId && list.length > 0) {
+        setSelectedAssociateId(list[0].userId);
+      } else if (fallbackId) {
+        setSelectedAssociateId(fallbackId);
+      }
     } catch (error) {
       setStatus(error.message);
     }
@@ -33,8 +40,11 @@ function AssignmentsPanel({ employees = [], resources = [] }) {
     if (!selectedUserId) return;
     setStatus('');
     try {
-      await promoteAssociate(Number(selectedUserId), role);
-      await loadAssociates();
+      const id = Number(selectedUserId);
+      await promoteAssociate(id, role);
+      await loadAssociates(id);
+      const promoted = associates.find((a) => a.userId === id);
+      setSelectedItemIds(promoted?.assignedItemIds || []);
       setStatus('User promoted to warehouse associate.');
     } catch (error) {
       setStatus(error.message);

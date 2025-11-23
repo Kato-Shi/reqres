@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -15,7 +16,7 @@ namespace ReqresIntegratedApplication.WebAPI.Services
     {
         private readonly ReqResClient _client;
         private Resource? _lastPage;
-        private readonly Dictionary<int, ResourceData> _resourceCache = new();
+        private readonly ConcurrentDictionary<int, ResourceData> _resourceCache = new();
         private int _nextId = 204;
         private static readonly ResourceData[] DemoResources =
         {

@@ -28,11 +28,11 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddScoped<UserServices>();
-builder.Services.AddScoped<WarehouseDashboardService>();
-builder.Services.AddScoped<EmployeeService>();
-builder.Services.AddScoped<ResourceService>();
-builder.Services.AddScoped<WarehouseAssignmentService>();
+builder.Services.AddSingleton<EmployeeService>();
+builder.Services.AddSingleton<ResourceService>();
+builder.Services.AddSingleton<WarehouseAssignmentService>();
+builder.Services.AddSingleton<UserServices>();
+builder.Services.AddSingleton<WarehouseDashboardService>();
 
 var app = builder.Build();
 

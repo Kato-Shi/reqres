@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace ReqresIntegratedApplication.WebAPI.Services
     {
         private readonly EmployeeService _employees;
         private readonly ResourceService _resources;
-        private readonly Dictionary<int, WarehouseAssociate> _associates = new();
+        private readonly ConcurrentDictionary<int, WarehouseAssociate> _associates = new();
 
         public WarehouseAssignmentService(EmployeeService employees, ResourceService resources)
         {
