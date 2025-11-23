@@ -12,13 +12,16 @@ function Stat({ label, value, helper }) {
 
 function DashboardCards({ summary, roster }) {
   const memberCount = roster?.members?.length ?? roster?.data?.length ?? 0;
+  const resourceCount = summary?.resourceCountOnPage ?? 0;
   return (
     <div className="panel">
       <h2>Warehouse Snapshot</h2>
-      <p>Quick metrics pulled from the ReqRes-powered API so you can see team size at a glance.</p>
+      <p>Quick metrics pulled from the ReqRes-powered API so you can see team size and stocked items at a glance.</p>
       <div className="stat-grid">
         <Stat label="Members on page" value={summary?.countOnPage ?? memberCount} />
         <Stat label="Total members" value={summary?.totalMembers ?? roster?.total ?? 0} />
+        <Stat label="Resources on page" value={resourceCount} />
+        <Stat label="Total resources" value={summary?.totalResources ?? 0} />
         <Stat label="Page" value={`${summary?.page ?? roster?.page ?? 1} of ${summary?.totalPages ?? roster?.totalPages ?? 1}`} />
         <Stat label="Per page" value={summary?.perPage ?? roster?.perPage ?? 6} helper="Adjust query string to test pagination." />
       </div>

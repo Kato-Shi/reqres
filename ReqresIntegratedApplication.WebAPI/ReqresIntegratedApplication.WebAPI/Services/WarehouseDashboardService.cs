@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ReqResIntegratedApplication.Integration.ReqresIntegration.Entities;
-using ReqResIntegratedApplication.Integration.ReqresIntegration.Services;
 using ReqresIntegratedApplication.WebAPI.Models;
 
 namespace ReqresIntegratedApplication.WebAPI.Services
@@ -11,22 +10,25 @@ namespace ReqresIntegratedApplication.WebAPI.Services
     public class WarehouseDashboardService
     {
         private const string UsersBaseUrl = "https://reqres.in/api/users";
-        private readonly UserServices _userServices;
+        private readonly EmployeeService _employeeService;
+        private readonly ResourceService _resourceService;
 
-        public WarehouseDashboardService(UserServices userServices)
+        public WarehouseDashboardService(EmployeeService employeeService, ResourceService resourceService)
         {
-            _userServices = userServices ?? throw new ArgumentNullException(nameof(userServices));
+            _employeeService = employeeService ?? throw new ArgumentNullException(nameof(employeeService));
+            _resourceService = resourceService ?? throw new ArgumentNullException(nameof(resourceService));
         }
 
         public async Task<EmployeePageDto?> GetEmployeesAsync(int page = 1, int perPage = 6)
         {
-            var response = await _userServices.GetUsers(page, perPage);
+            var response = await _employeeService.GetUsersAsync(page, perPage);
             if (response is null)
             {
                 return null;
             }
 
             var members = MapMembers(response.Data);
+            var resources = await _resourceService.GetResourcesAsync(page, perPage) ?? new Resource();
             return new EmployeePageDto
             {
                 Page = response.Page,
@@ -40,7 +42,9 @@ namespace ReqresIntegratedApplication.WebAPI.Services
                     PerPage = response.PerPage,
                     TotalMembers = response.Total,
                     TotalPages = response.TotalPages,
-                    CountOnPage = members.Count
+                    CountOnPage = members.Count,
+                    ResourceCountOnPage = resources.Data?.Count ?? 0,
+                    TotalResources = resources.Total
                 }
             };
         }
@@ -59,7 +63,7 @@ namespace ReqresIntegratedApplication.WebAPI.Services
             }
 
             var createUserRequest = new CreateUserRequest(request.Name, request.Role);
-            var created = await _userServices.PostUser(createUserRequest);
+            var created = await _employeeService.CreateUserAsync(createUserRequest);
             if (created is null)
             {
                 return null;
