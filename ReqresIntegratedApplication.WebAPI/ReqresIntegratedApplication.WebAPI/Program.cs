@@ -1,11 +1,38 @@
+using ReqResIntegratedApplication.Integration.ReqresIntegration.Manager;
+using ReqResIntegratedApplication.Integration.ReqresIntegration.Services;
+using ReqresIntegratedApplication.WebAPI.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<IUserManager, UserManager>();
+builder.Services.AddHttpClient<ReqResClient>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Frontend", policy =>
+    {
+        policy
+            .WithOrigins(
+                "http://localhost:5173",
+                "http://127.0.0.1:5173",
+                "http://localhost:4173",
+                "http://127.0.0.1:4173")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
+builder.Services.AddSingleton<EmployeeService>();
+builder.Services.AddSingleton<ResourceService>();
+builder.Services.AddSingleton<WarehouseAssignmentService>();
+builder.Services.AddSingleton<UserServices>();
+builder.Services.AddSingleton<WarehouseDashboardService>();
 
 var app = builder.Build();
 
@@ -16,9 +43,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseCors("Frontend");
 
-app.UseAuthorization();
+app.UseHttpsRedirection();
 
 app.MapControllers();
 
