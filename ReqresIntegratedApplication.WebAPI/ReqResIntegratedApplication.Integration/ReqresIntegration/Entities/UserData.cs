@@ -19,17 +19,24 @@ namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Entities
         [JsonPropertyName("avatar")]
         public string? Avatar { get; set; }
 
+        /// <summary>
+        /// Local-only job title used to keep PUT/PATCH changes visible in subsequent reads.
+        /// </summary>
+        [JsonPropertyName("job")]
+        public string? Job { get; set; }
+
         public UserData()
         {
         }
 
-        public UserData(int id, string? email, string? firstName, string? lastName, string? avatar)
+        public UserData(int id, string? email, string? firstName, string? lastName, string? avatar, string? job = null)
         {
             Id = id;
             Email = email;
             FirstName = firstName;
             LastName = lastName;
             Avatar = avatar;
+            Job = job;
         }
     }
 }

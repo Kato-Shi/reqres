@@ -44,7 +44,7 @@ function EmployeesPanel({ onUsersLoaded }) {
       setSelectedUser(detail);
       setUpdateForm({
         name: `${detail.first_name ?? ''} ${detail.last_name ?? ''}`.trim(),
-        job: 'Updated Job'
+        job: detail.job ?? 'Updated Job'
       });
     } catch (error) {
       setStatus(error.message);
@@ -147,6 +147,7 @@ function EmployeesPanel({ onUsersLoaded }) {
               <div className="detail-row"><strong>ID</strong> {selectedUser.id}</div>
               <div className="detail-row"><strong>Name</strong> {selectedUser.first_name} {selectedUser.last_name}</div>
               <div className="detail-row"><strong>Email</strong> {selectedUser.email}</div>
+              {selectedUser.job && <div className="detail-row"><strong>Job</strong> {selectedUser.job}</div>}
               {selectedUser.avatar && <img src={selectedUser.avatar} alt="avatar" className="avatar" />}
 
               <label>

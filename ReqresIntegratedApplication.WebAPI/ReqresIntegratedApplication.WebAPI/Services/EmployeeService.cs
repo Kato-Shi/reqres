@@ -72,10 +72,17 @@ namespace ReqresIntegratedApplication.WebAPI.Services
                 var response = await _client.GetUserAsync(id);
                 if (response?.Data is not null && !_deletedUsers.ContainsKey(id))
                 {
-                    _localUsers[id] = response.Data;
+                    var merged = _localUsers.GetOrAdd(id, _ => new UserData { Id = id });
+                    merged.FirstName = response.Data.FirstName ?? merged.FirstName;
+                    merged.LastName = response.Data.LastName ?? merged.LastName;
+                    merged.Email = response.Data.Email ?? merged.Email;
+                    merged.Avatar = response.Data.Avatar ?? merged.Avatar;
+                    _localUsers[id] = merged;
                 }
 
-                return response?.Data ?? GetLocalOrDemoUser(id);
+                return _localUsers.TryGetValue(id, out var mergedUser)
+                    ? mergedUser
+                    : response?.Data ?? GetLocalOrDemoUser(id);
             }
             catch (HttpRequestException)
             {
@@ -111,7 +118,8 @@ namespace ReqresIntegratedApplication.WebAPI.Services
                     Email = $"{(parsed.first ?? "user").Replace(" ", ".").ToLower()}@reqres.in",
                     FirstName = parsed.first,
                     LastName = parsed.last,
-                    Avatar = null
+                    Avatar = null,
+                    Job = request.Job
                 };
 
                 _localUsers[synthetic.Id] = synthetic;
@@ -148,6 +156,10 @@ namespace ReqresIntegratedApplication.WebAPI.Services
                 updated.LastName = parsed.last ?? updated.LastName;
                 updated.Email = updated.Email ?? BuildEmail(parsed, id);
                 updated.Avatar = updated.Avatar;
+                if (!string.IsNullOrWhiteSpace(request.Job))
+                {
+                    updated.Job = request.Job;
+                }
                 _localUsers[id] = updated;
                 _deletedUsers.TryRemove(id, out _);
             }
