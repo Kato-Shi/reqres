@@ -15,6 +15,7 @@ namespace ReqresIntegratedApplication.WebAPI.Services
     {
         private readonly ReqResClient _client;
         private static readonly System.Collections.Concurrent.ConcurrentDictionary<int, UserData> _localUsers = new();
+        private static readonly System.Collections.Concurrent.ConcurrentDictionary<int, byte> _deletedUsers = new();
         private static readonly UserData[] DemoUsers =
         {
             new() { Id = 101, Email = "demo.jane@reqres.in", FirstName = "Demo", LastName = "Jane", Avatar = null },
@@ -36,16 +37,26 @@ namespace ReqresIntegratedApplication.WebAPI.Services
                 {
                     foreach (var user in response.Data)
                     {
-                        _localUsers[user.Id] = user;
+                        if (_deletedUsers.ContainsKey(user.Id))
+                        {
+                            continue;
+                        }
+
+                        var merged = _localUsers.GetOrAdd(user.Id, _ => new UserData { Id = user.Id });
+                        merged.FirstName ??= user.FirstName;
+                        merged.LastName ??= user.LastName;
+                        merged.Email ??= user.Email;
+                        merged.Avatar ??= user.Avatar;
+                        _localUsers[user.Id] = merged;
                     }
                 }
 
-                return response ?? BuildLocalUserPage();
+                return BuildLocalUserPage(page, perPage);
             }
             catch (HttpRequestException)
             {
                 // If the upstream call fails (401/403/timeout), surface a local fallback page
-                return BuildLocalUserPage();
+                return BuildLocalUserPage(page, perPage);
             }
         }
 
@@ -59,7 +70,7 @@ namespace ReqresIntegratedApplication.WebAPI.Services
             try
             {
                 var response = await _client.GetUserAsync(id);
-                if (response?.Data is not null)
+                if (response?.Data is not null && !_deletedUsers.ContainsKey(id))
                 {
                     _localUsers[id] = response.Data;
                 }
@@ -92,16 +103,19 @@ namespace ReqresIntegratedApplication.WebAPI.Services
             }
             if (created is not null)
             {
+                var parsed = ParseName(request.Name);
+                var id = int.TryParse(created.Id, out var newId) ? newId : _localUsers.Keys.DefaultIfEmpty().Max() + 1;
                 var synthetic = new UserData
                 {
-                    Id = int.TryParse(created.Id, out var newId) ? newId : _localUsers.Keys.DefaultIfEmpty().Max() + 1,
-                    Email = $"{request.Name.Replace(" ", ".").ToLower()}@reqres.in",
-                    FirstName = request.Name,
-                    LastName = request.Job,
+                    Id = id,
+                    Email = $"{(parsed.first ?? "user").Replace(" ", ".").ToLower()}@reqres.in",
+                    FirstName = parsed.first,
+                    LastName = parsed.last,
                     Avatar = null
                 };
 
                 _localUsers[synthetic.Id] = synthetic;
+                _deletedUsers.TryRemove(synthetic.Id, out _);
             }
 
             return created;
@@ -128,16 +142,14 @@ namespace ReqresIntegratedApplication.WebAPI.Services
 
             if (response is not null)
             {
-                var names = (request.Name ?? string.Empty).Split(' ', 2, System.StringSplitOptions.RemoveEmptyEntries);
-                var first = names.Length > 0 ? names[0] : request.Name;
-                var last = names.Length > 1 ? names[1] : request.Job;
-
+                var parsed = ParseName(request.Name);
                 var updated = _localUsers.GetOrAdd(id, _ => new UserData { Id = id });
-                updated.FirstName = first;
-                updated.LastName = last;
-                updated.Email = updated.Email ?? $"{first?.ToLower()}.{last?.ToLower()}@reqres.in";
+                updated.FirstName = parsed.first ?? updated.FirstName ?? request.Name;
+                updated.LastName = parsed.last ?? updated.LastName;
+                updated.Email = updated.Email ?? BuildEmail(parsed, id);
                 updated.Avatar = updated.Avatar;
                 _localUsers[id] = updated;
+                _deletedUsers.TryRemove(id, out _);
             }
 
             return response;
@@ -156,12 +168,13 @@ namespace ReqresIntegratedApplication.WebAPI.Services
             }
 
             _localUsers.TryRemove(id, out _);
+            _deletedUsers[id] = 1;
             return deleted;
         }
 
         public IReadOnlyCollection<UserData> GetLocalUsers() => _localUsers.Values.ToList();
 
-        private User? BuildLocalUserPage()
+        private User? BuildLocalUserPage(int page = 1, int perPage = int.MaxValue)
         {
             if (_localUsers.Count == 0)
             {
@@ -171,18 +184,34 @@ namespace ReqresIntegratedApplication.WebAPI.Services
                 }
             }
 
+            var filtered = _localUsers
+                .Where(kvp => !_deletedUsers.ContainsKey(kvp.Key))
+                .Select(kvp => kvp.Value)
+                .OrderBy(u => u.Id)
+                .ToList();
+
+            var pageData = filtered
+                .Skip((page - 1) * perPage)
+                .Take(perPage)
+                .ToList();
+
             return new User
             {
-                Page = 1,
-                PerPage = _localUsers.Count,
-                Total = _localUsers.Count,
-                TotalPages = 1,
-                Data = _localUsers.Values.ToList()
+                Page = page,
+                PerPage = perPage,
+                Total = filtered.Count,
+                TotalPages = (int)Math.Ceiling(filtered.Count / (double)perPage),
+                Data = pageData
             };
         }
 
         private UserData? GetLocalOrDemoUser(int id)
         {
+            if (_deletedUsers.ContainsKey(id))
+            {
+                return null;
+            }
+
             if (_localUsers.TryGetValue(id, out var cached))
             {
                 return cached;
@@ -196,6 +225,22 @@ namespace ReqresIntegratedApplication.WebAPI.Services
             }
 
             return null;
+        }
+
+        private static (string? first, string? last) ParseName(string? name)
+        {
+            var parts = (name ?? string.Empty).Split(' ', 2, StringSplitOptions.RemoveEmptyEntries);
+            var first = parts.Length > 0 ? parts[0] : null;
+            var last = parts.Length > 1 ? parts[1] : null;
+            return (first, last);
+        }
+
+        private static string BuildEmail((string? first, string? last) parsed, int id)
+        {
+            var left = string.Join(".", new[] { parsed.first, parsed.last }.Where(p => !string.IsNullOrWhiteSpace(p)))
+                .ToLower();
+            left = string.IsNullOrWhiteSpace(left) ? $"user{id}" : left;
+            return $"{left}@reqres.in";
         }
     }
 }

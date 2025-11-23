@@ -43,8 +43,8 @@ function EmployeesPanel({ onUsersLoaded }) {
       const detail = await getEmployee(id);
       setSelectedUser(detail);
       setUpdateForm({
-        name: `${detail.first_name} ${detail.last_name}`.trim(),
-        job: detail.last_name || 'Updated Job'
+        name: `${detail.first_name ?? ''} ${detail.last_name ?? ''}`.trim(),
+        job: 'Updated Job'
       });
     } catch (error) {
       setStatus(error.message);
@@ -80,7 +80,7 @@ function EmployeesPanel({ onUsersLoaded }) {
     if (!selectedUser) return;
     setStatus('');
     try {
-      const updated = await patchEmployee(selectedUser.id, { job: updateForm.job });
+      const updated = await patchEmployee(selectedUser.id, { name: updateForm.name, job: updateForm.job });
       setStatus(`PATCH saved at ${updated.updatedAt}`);
       await loadUsers();
       await handleSelect(selectedUser.id);
