@@ -31,7 +31,10 @@ namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Services
 
         public Task<LoginResponse?> LoginAsync(LoginRequest request)
         {
-            return PostAsync<LoginRequest, LoginResponse>("login", request);
+            // The login endpoint can respond with 400/401 when credentials are wrong.
+            // We tolerate non-success here so the caller can surface a friendly message
+            // instead of throwing a HttpRequestException that bubbles to the UI.
+            return PostAsync<LoginRequest, LoginResponse>("login", request, ensureSuccess: false);
         }
 
         public Task<User?> GetUsersAsync(int page, int perPage) =>
@@ -55,7 +58,7 @@ namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Services
         public Task<ResourceData?> GetResourceAsync(int id) =>
             _httpClient.GetFromJsonAsync<ResourceData>($"unknown/{id}");
 
-        private async Task<TResult?> PostAsync<TRequest, TResult>(string relativeUrl, TRequest request)
+        private async Task<TResult?> PostAsync<TRequest, TResult>(string relativeUrl, TRequest request, bool ensureSuccess = true)
             where TRequest : class
             where TResult : class
         {
@@ -66,7 +69,15 @@ namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Services
 
             using var content = BuildJsonContent(request);
             var response = await _httpClient.PostAsync(relativeUrl, content);
-            response.EnsureSuccessStatusCode();
+            if (ensureSuccess)
+            {
+                response.EnsureSuccessStatusCode();
+            }
+            else if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
             return await response.Content.ReadFromJsonAsync<TResult>(CaseInsensitive);
         }
 
