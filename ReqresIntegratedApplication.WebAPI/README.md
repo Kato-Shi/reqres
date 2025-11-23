@@ -1,6 +1,6 @@
 # TeamShift Lite Warehouse System
 
-A lightweight warehouse management sample that pairs an ASP.NET Core API with a React single-page app. The backend wraps the ReqRes API (https://reqres.in) for authentication, employees, and resources; the frontend consumes those endpoints for login, workforce views, resource browsing, and in-memory assignments.
+A lightweight warehouse management sample that pairs an ASP.NET Core API with a React single-page app. The backend wraps the ReqRes API (https://reqres.in) for employees and resources; the frontend consumes those endpoints for workforce views, resource browsing, and in-memory assignments without any authentication wall.
 
 ## Repository layout
 - `ReqresIntegratedApplication.WebAPI/` — ASP.NET Core Web API that proxies ReqRes and keeps in-memory assignments.
@@ -34,7 +34,7 @@ You can launch the API directly with the green **Run** button in Visual Studio:
 5. Start the React frontend in a terminal (`npm run dev` from `warehouse-frontend/`) and browse to `http://localhost:5173` to exercise the API.
 
 ## How the system works
-- **Authentication**: `POST /api/auth/login` now performs a local credential check to avoid upstream 401/403 errors from proxies blocking ReqRes. It accepts the demo credentials `eve.holt@reqres.in` / `cityslicka`, caches a local token in `AuthService`, and returns it to the SPA (which stores it in `localStorage`). `POST /api/auth/logout` clears server and client tokens.
+- **Authentication**: None required. All endpoints are open and talk directly to ReqRes for live data. This removes the prior demo-login check that could be blocked by corporate proxies.
 - **Employees (Users)**: `GET /api/employees` fetches paged ReqRes users; `GET /api/employees/{id}` reads details. Creates/updates flow through ReqRes via `POST /api/users`, `PUT /api/users/{id}`, and `PATCH /api/users/{id}` with local in-memory updates to reflect changes immediately in the UI. `DELETE /api/employees/{id}` removes the employee from the in-memory cache and attempts the ReqRes delete for parity.
 - **Items (Resources)**: `GET /api/items` and `GET /api/items/{id}` surface ReqRes `/unknown` resources, treated as warehouse items.
 - **Assignments**: Warehouse associates are promoted from employees through `POST /api/warehouse/assignments/promote/{userId}`. Item assignments are stored in memory and managed with `POST /api/warehouse/assignments/{userId}/items` plus read via `GET /api/warehouse/assignments`.
@@ -44,6 +44,5 @@ You can launch the API directly with the green **Run** button in Visual Studio:
 To produce a static bundle, run `npm run build` inside `warehouse-frontend/`; the output in `dist/` can be hosted behind any web server configured to reach the API base URL. The API itself remains stateless aside from its in-memory assignment cache—no database is required.
 
 ## Notes
-- The API honors the ReqRes demo login credentials locally: `eve.holt@reqres.in` / `cityslicka` (no external call is made for login).
-- Other endpoints still communicate with ReqRes; if your network blocks `reqres.in`, the API now falls back to demo employees/resources so Swagger and the SPA stay functional even when the upstream returns 401/403.
+- If your network blocks `reqres.in`, the API still falls back to demo employees/resources so Swagger and the SPA stay functional even when the upstream returns 401/403.
 - Because assignment data is in-memory, restarting the API clears promotions/assignments; user/resource data is always refreshed from ReqRes.

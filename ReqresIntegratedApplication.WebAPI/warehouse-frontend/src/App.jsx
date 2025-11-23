@@ -2,13 +2,10 @@ import React, { useEffect, useState } from 'react';
 import AssignmentsPanel from './components/AssignmentsPanel.jsx';
 import DashboardCards from './components/DashboardCards.jsx';
 import EmployeesPanel from './components/EmployeesPanel.jsx';
-import LoginPanel from './components/LoginPanel.jsx';
 import ResourcesPanel from './components/ResourcesPanel.jsx';
 import * as api from './services/apiClient';
-import { getToken as loadToken, setToken as storeToken } from './services/session';
 
 function App() {
-  const [token, setToken] = useState(loadToken());
   const [activeTab, setActiveTab] = useState('dashboard');
   const [summary, setSummary] = useState(null);
   const [warehouseRoster, setWarehouseRoster] = useState(null);
@@ -17,12 +14,8 @@ function App() {
   const [status, setStatus] = useState('');
 
   useEffect(() => {
-    api.setToken(token);
-    storeToken(token);
-    if (token) {
-      hydrateDashboard();
-    }
-  }, [token]);
+    hydrateDashboard();
+  }, []);
 
   const hydrateDashboard = async () => {
     setStatus('');
@@ -38,32 +31,6 @@ function App() {
     }
   };
 
-  const handleLogout = async () => {
-    await api.logout();
-    setToken(null);
-    setActiveTab('dashboard');
-    setSummary(null);
-    setWarehouseRoster(null);
-    setEmployeePage(null);
-    setResourcePage(null);
-  };
-
-  if (!token) {
-    return (
-      <div className="app">
-        <header className="app-header">
-          <div>
-            <h1>TeamShift Lite: Warehouse Dashboard</h1>
-            <p>Sign in with the local demo credentials to unlock the workforce and inventory screens.</p>
-          </div>
-        </header>
-        <main>
-          <LoginPanel onAuthenticated={setToken} />
-        </main>
-      </div>
-    );
-  }
-
   const employees = employeePage?.data ?? [];
   const resources = resourcePage?.data ?? [];
 
@@ -72,14 +39,10 @@ function App() {
       <header className="app-header">
         <div>
           <h1>TeamShift Lite: Warehouse Dashboard</h1>
-          <p>
-            ReqRes-backed workforce and item management. Login is validated locally to avoid external 401s;
-            the token is stored in-memory only.
-          </p>
+          <p>ReqRes-backed workforce and item management without any authentication wall.</p>
         </div>
         <div className="nav-actions">
           <button onClick={hydrateDashboard}>Refresh Metrics</button>
-          <button onClick={handleLogout}>Logout</button>
         </div>
       </header>
 

@@ -1,24 +1,15 @@
-import { clearSession, setToken as persistToken } from './session';
-
 // Prefer an explicit base URL, then fall back to the current host (useful when the
 // SPA is served by the ASP.NET site), and finally default to the HTTPS profile
 // Visual Studio uses (https://localhost:7216).
 const explicitBase = import.meta.env.VITE_API_BASE_URL;
 const sameHostBase = typeof window !== 'undefined' ? `${window.location.origin}/api` : null;
 const API_BASE = (explicitBase || sameHostBase || 'https://localhost:7216/api').replace(/\/$/, '');
-let authToken = null;
 
 function buildHeaders(extra = {}) {
-  const headers = {
+  return {
     'Content-Type': 'application/json',
     ...extra
   };
-
-  if (authToken) {
-    headers.Authorization = `Bearer ${authToken}`;
-  }
-
-  return headers;
 }
 
 async function handleResponse(response) {
@@ -52,32 +43,6 @@ async function request(path, options = {}) {
   });
 
   return handleResponse(response);
-}
-
-export function setToken(token) {
-  authToken = token;
-  persistToken(token);
-}
-
-export async function login(email, password) {
-  const payload = await request('/auth/login', {
-    method: 'POST',
-    body: JSON.stringify({ email, password })
-  });
-
-  // The API performs an in-app credential check to avoid upstream ReqRes 401s.
-  // Persist the returned demo token so other requests stay consistent.
-  setToken(payload?.token || null);
-  return payload?.token;
-}
-
-export async function logout() {
-  try {
-    await request('/auth/logout', { method: 'POST' });
-  } finally {
-    authToken = null;
-    clearSession();
-  }
 }
 
 export async function getWorkforceSummary(page = 1, perPage = 6) {

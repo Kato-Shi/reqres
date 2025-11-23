@@ -30,7 +30,6 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<WarehouseDashboardService>();
-builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<EmployeeService>();
 builder.Services.AddScoped<ResourceService>();
 builder.Services.AddScoped<WarehouseAssignmentService>();
@@ -47,8 +46,6 @@ if (app.Environment.IsDevelopment())
 app.UseCors("Frontend");
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.MapControllers();
 

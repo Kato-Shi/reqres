@@ -29,31 +29,6 @@ namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Services
             }
         }
 
-        public async Task<LoginResponse?> LoginAsync(LoginRequest request)
-        {
-            if (request is null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
-            using var content = BuildJsonContent(request);
-            var response = await _httpClient.PostAsync("login", content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                return await response.Content.ReadFromJsonAsync<LoginResponse>(CaseInsensitive);
-            }
-
-            // Capture the status code and body so upstream callers can explain what happened
-            // (for example, corporate proxies returning 401/403) instead of throwing.
-            var body = await response.Content.ReadAsStringAsync();
-            return new LoginResponse
-            {
-                Error = $"ReqRes login returned {(int)response.StatusCode} {response.ReasonPhrase}. Body: {body}" ??
-                        "Login failed."
-            };
-        }
-
         public Task<User?> GetUsersAsync(int page, int perPage) =>
             _httpClient.GetFromJsonAsync<User>($"users?page={page}&per_page={perPage}");
 
