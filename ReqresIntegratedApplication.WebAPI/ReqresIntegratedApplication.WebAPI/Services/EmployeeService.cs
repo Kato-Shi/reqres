@@ -115,7 +115,9 @@ namespace ReqresIntegratedApplication.WebAPI.Services
                 var synthetic = new UserData
                 {
                     Id = id,
-                    Email = $"{(parsed.first ?? "user").Replace(" ", ".").ToLower()}@reqres.in",
+                    Email = string.IsNullOrWhiteSpace(request.Email)
+                        ? $"{(parsed.first ?? "user").Replace(" ", ".").ToLower()}@reqres.in"
+                        : request.Email,
                     FirstName = parsed.first,
                     LastName = parsed.last,
                     Avatar = null,
@@ -154,7 +156,9 @@ namespace ReqresIntegratedApplication.WebAPI.Services
                 var updated = _localUsers.GetOrAdd(id, _ => new UserData { Id = id });
                 updated.FirstName = parsed.first ?? updated.FirstName ?? request.Name;
                 updated.LastName = parsed.last ?? updated.LastName;
-                updated.Email = updated.Email ?? BuildEmail(parsed, id);
+                updated.Email = !string.IsNullOrWhiteSpace(request.Email)
+                    ? request.Email
+                    : updated.Email ?? BuildEmail(parsed, id);
                 updated.Avatar = updated.Avatar;
                 if (!string.IsNullOrWhiteSpace(request.Job))
                 {

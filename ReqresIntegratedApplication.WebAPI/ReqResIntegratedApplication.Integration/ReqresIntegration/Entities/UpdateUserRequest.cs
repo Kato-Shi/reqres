@@ -11,10 +11,11 @@ namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Entities
         {
         }
 
-        public UpdateUserRequest(string name, string job)
+        public UpdateUserRequest(string name, string job, string? email = null)
         {
             Name = name;
             Job = job;
+            Email = email;
         }
 
         [JsonPropertyName("name")]
@@ -22,5 +23,8 @@ namespace ReqResIntegratedApplication.Integration.ReqresIntegration.Entities
 
         [JsonPropertyName("job")]
         public string Job { get; set; } = string.Empty;
+
+        [JsonPropertyName("email")]
+        public string? Email { get; set; }
     }
 }

@@ -46,14 +46,14 @@ namespace ReqresIntegratedApplication.WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<UpdateUserResponse?>> Put(int id, [FromBody] UserUpdateDto request)
         {
-            var response = await _employees.UpdateUserAsync(id, new UpdateUserRequest(request.Name, request.Job), false);
+            var response = await _employees.UpdateUserAsync(id, new UpdateUserRequest(request.Name, request.Job, request.Email), false);
             return response is null ? StatusCode(502, "ReqRes did not return an update payload.") : Ok(response);
         }
 
         [HttpPatch("{id}")]
         public async Task<ActionResult<UpdateUserResponse?>> Patch(int id, [FromBody] UserUpdateDto request)
         {
-            var response = await _employees.UpdateUserAsync(id, new UpdateUserRequest(request.Name, request.Job), true);
+            var response = await _employees.UpdateUserAsync(id, new UpdateUserRequest(request.Name, request.Job, request.Email), true);
             return response is null ? StatusCode(502, "ReqRes did not return an update payload.") : Ok(response);
         }
 

@@ -9,5 +9,8 @@ namespace ReqresIntegratedApplication.WebAPI.Models
 
         [Required]
         public string Job { get; set; } = string.Empty;
+
+        [EmailAddress]
+        public string? Email { get; set; }
     }
 }

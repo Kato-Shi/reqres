@@ -13,8 +13,8 @@ function EmployeesPanel({ onUsersLoaded }) {
   const [perPage, setPerPage] = useState(6);
   const [roster, setRoster] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [createForm, setCreateForm] = useState({ name: 'New Hire', job: 'Warehouse Operator' });
-  const [updateForm, setUpdateForm] = useState({ name: '', job: '' });
+  const [createForm, setCreateForm] = useState({ name: 'New Hire', job: 'Warehouse Operator', email: 'new.hire@reqres.in' });
+  const [updateForm, setUpdateForm] = useState({ name: '', job: '', email: '' });
   const [status, setStatus] = useState('');
 
   const users = useMemo(() => roster?.data || [], [roster]);
@@ -44,7 +44,8 @@ function EmployeesPanel({ onUsersLoaded }) {
       setSelectedUser(detail);
       setUpdateForm({
         name: `${detail.first_name ?? ''} ${detail.last_name ?? ''}`.trim(),
-        job: detail.job ?? 'Updated Job'
+        job: detail.job ?? 'Updated Job',
+        email: detail.email ?? ''
       });
     } catch (error) {
       setStatus(error.message);
@@ -80,7 +81,7 @@ function EmployeesPanel({ onUsersLoaded }) {
     if (!selectedUser) return;
     setStatus('');
     try {
-      const updated = await patchEmployee(selectedUser.id, { name: updateForm.name, job: updateForm.job });
+      const updated = await patchEmployee(selectedUser.id, { name: updateForm.name, job: updateForm.job, email: updateForm.email });
       setStatus(`PATCH saved at ${updated.updatedAt}`);
       await loadUsers();
       await handleSelect(selectedUser.id);
@@ -155,6 +156,10 @@ function EmployeesPanel({ onUsersLoaded }) {
                 <input value={updateForm.name} onChange={(e) => setUpdateForm({ ...updateForm, name: e.target.value })} />
               </label>
               <label>
+                Email
+                <input value={updateForm.email} onChange={(e) => setUpdateForm({ ...updateForm, email: e.target.value })} />
+              </label>
+              <label>
                 Job Title
                 <input value={updateForm.job} onChange={(e) => setUpdateForm({ ...updateForm, job: e.target.value })} />
               </label>
@@ -177,6 +182,9 @@ function EmployeesPanel({ onUsersLoaded }) {
       <form className="form inline" onSubmit={handleCreate}>
         <label>Name
           <input value={createForm.name} onChange={(e) => setCreateForm({ ...createForm, name: e.target.value })} required />
+        </label>
+        <label>Email
+          <input value={createForm.email} onChange={(e) => setCreateForm({ ...createForm, email: e.target.value })} required />
         </label>
         <label>Job Title
           <input value={createForm.job} onChange={(e) => setCreateForm({ ...createForm, job: e.target.value })} required />
