@@ -96,6 +96,20 @@ export async function getResource(id) {
   return request(`/items/${id}`);
 }
 
+export async function createResource(payload) {
+  return request('/items', {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  });
+}
+
+export async function updateResource(id, payload) {
+  return request(`/items/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(payload)
+  });
+}
+
 export async function getAssociates() {
   return request('/warehouse/assignments');
 }

@@ -16,6 +16,7 @@ namespace ReqresIntegratedApplication.WebAPI.Services
         private readonly ReqResClient _client;
         private Resource? _lastPage;
         private readonly Dictionary<int, ResourceData> _resourceCache = new();
+        private int _nextId = 204;
         private static readonly ResourceData[] DemoResources =
         {
             new() { Id = 201, Name = "Demo Widget", Color = "#0099cc", Year = 2024, PantoneValue = "14-4121" },
@@ -38,6 +39,7 @@ namespace ReqresIntegratedApplication.WebAPI.Services
                     foreach (var resource in _lastPage.Data)
                     {
                         _resourceCache[resource.Id] = resource;
+                        _nextId = Math.Max(_nextId, resource.Id + 1);
                     }
                 }
 
@@ -74,6 +76,30 @@ namespace ReqresIntegratedApplication.WebAPI.Services
 
         public IReadOnlyCollection<ResourceData> GetCachedResources() => _resourceCache.Values;
 
+        public ResourceData AddResource(ResourceData resource)
+        {
+            resource.Id = resource.Id == 0 ? _nextId++ : resource.Id;
+            _resourceCache[resource.Id] = resource;
+            return resource;
+        }
+
+        public ResourceData? UpdateResource(int id, ResourceData updated)
+        {
+            if (!_resourceCache.TryGetValue(id, out var existing))
+            {
+                existing = new ResourceData { Id = id };
+                _resourceCache[id] = existing;
+                _nextId = Math.Max(_nextId, id + 1);
+            }
+
+            existing.Name = updated.Name;
+            existing.Color = updated.Color;
+            existing.Year = updated.Year;
+            existing.PantoneValue = updated.PantoneValue;
+
+            return existing;
+        }
+
         private Resource? BuildLocalResourcePage()
         {
             if (_resourceCache.Count == 0)
@@ -81,6 +107,7 @@ namespace ReqresIntegratedApplication.WebAPI.Services
                 foreach (var resource in DemoResources)
                 {
                     _resourceCache[resource.Id] = resource;
+                    _nextId = Math.Max(_nextId, resource.Id + 1);
                 }
             }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { getResource, getResources } from '../services/apiClient';
+import { createResource, getResource, getResources, updateResource } from '../services/apiClient';
 
 function ResourcesPanel({ onResourcesLoaded }) {
   const [page, setPage] = useState(1);
@@ -7,6 +7,12 @@ function ResourcesPanel({ onResourcesLoaded }) {
   const [resourcePage, setResourcePage] = useState(null);
   const [selected, setSelected] = useState(null);
   const [status, setStatus] = useState('');
+  const [form, setForm] = useState({
+    name: '',
+    color: '#0099cc',
+    year: new Date().getFullYear(),
+    pantoneValue: ''
+  });
 
   const resources = useMemo(() => resourcePage?.data || [], [resourcePage]);
 
@@ -32,6 +38,60 @@ function ResourcesPanel({ onResourcesLoaded }) {
     try {
       const detail = await getResource(id);
       setSelected(detail);
+      setForm({
+        name: detail.name || '',
+        color: detail.color || '#0099cc',
+        year: detail.year || new Date().getFullYear(),
+        pantoneValue: detail.pantone_value || ''
+      });
+    } catch (error) {
+      setStatus(error.message);
+    }
+  };
+
+  const handleFormChange = (field, value) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleCreate = async () => {
+    setStatus('');
+    try {
+      await createResource({
+        name: form.name,
+        color: form.color,
+        year: Number(form.year) || 0,
+        pantoneValue: form.pantoneValue
+      });
+      setForm({
+        name: '',
+        color: '#0099cc',
+        year: new Date().getFullYear(),
+        pantoneValue: ''
+      });
+      await loadResources();
+      setStatus('Resource added locally.');
+    } catch (error) {
+      setStatus(error.message);
+    }
+  };
+
+  const handleUpdate = async () => {
+    if (!selected) {
+      setStatus('Select a resource to edit.');
+      return;
+    }
+
+    setStatus('');
+    try {
+      const updated = await updateResource(selected.id, {
+        name: form.name,
+        color: form.color,
+        year: Number(form.year) || 0,
+        pantoneValue: form.pantoneValue
+      });
+      setSelected(updated);
+      await loadResources();
+      setStatus('Resource updated.');
     } catch (error) {
       setStatus(error.message);
     }
@@ -75,17 +135,27 @@ function ResourcesPanel({ onResourcesLoaded }) {
         </div>
 
         <div>
-          {selected ? (
-            <div className="detail-card">
-              <div className="detail-row"><strong>ID</strong> {selected.id}</div>
-              <div className="detail-row"><strong>Name</strong> {selected.name}</div>
-              <div className="detail-row"><strong>Year</strong> {selected.year}</div>
-              <div className="detail-row"><strong>Color</strong> <span className="pill" style={{ background: selected.color }}>{selected.color}</span></div>
-              <div className="detail-row"><strong>Pantone</strong> {selected.pantone_value}</div>
+          <div className="detail-card">
+            <div className="detail-row">
+              <strong>ID</strong> {selected ? selected.id : 'New'}
             </div>
-          ) : (
-            <p>Select an item to view details.</p>
-          )}
+            <label className="detail-row">Name
+              <input value={form.name} onChange={(e) => handleFormChange('name', e.target.value)} />
+            </label>
+            <label className="detail-row">Year
+              <input type="number" value={form.year} onChange={(e) => handleFormChange('year', e.target.value)} />
+            </label>
+            <label className="detail-row">Color
+              <input type="color" value={form.color} onChange={(e) => handleFormChange('color', e.target.value)} />
+            </label>
+            <label className="detail-row">Pantone
+              <input value={form.pantoneValue} onChange={(e) => handleFormChange('pantoneValue', e.target.value)} placeholder="14-4121" />
+            </label>
+            <div className="button-row">
+              <button type="button" onClick={handleCreate}>Add Resource</button>
+              <button type="button" onClick={handleUpdate} disabled={!selected}>Save Changes</button>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -34,7 +34,7 @@ A lightweight React single-page app that sits on top of the existing ASP.NET Cor
 ## Key screens
 - **Dashboard**: Shows the workforce snapshot from `/api/warehouse/workforce-summary` and `/api/warehouse/employees`.
 - **Employees**: Lists, creates (POST), updates (PUT), and patches (PATCH) users via `/api/employees` endpoints, reflecting changes locally.
-- **Resources**: Lists ReqRes `unknown` records via `/api/items` and lets you inspect each item.
+- **Resources**: Lists ReqRes `unknown` records via `/api/items`, lets you add local resources (POST), and edit existing ones (PUT) so tooling can be managed alongside associates.
 - **Assignments**: Promotes employees to associates and assigns item IDs using `/api/warehouse/assignments/*` endpoints; assignments are kept server-side in memory.
 
 ## Configuration

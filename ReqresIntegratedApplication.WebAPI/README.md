@@ -41,7 +41,7 @@ You can launch the API directly with the green **Run** button in Visual Studio:
 ## How the system works
 - **Authentication**: None required. All endpoints are open and talk directly to ReqRes for live data. This removes the prior demo-login check that could be blocked by corporate proxies.
 - **Employees (Users)**: `GET /api/employees` fetches paged ReqRes users; `GET /api/employees/{id}` reads details. Creates/updates flow through ReqRes via `POST /api/users`, `PUT /api/users/{id}`, and `PATCH /api/users/{id}` with local in-memory updates to reflect changes immediately in the UI. `DELETE /api/employees/{id}` removes the employee from the in-memory cache and attempts the ReqRes delete for parity.
-- **Items (Resources)**: `GET /api/items` and `GET /api/items/{id}` surface ReqRes `/unknown` resources, treated as warehouse items.
+- **Items (Resources)**: `GET /api/items` and `GET /api/items/{id}` surface ReqRes `/unknown` resources, treated as warehouse items. Local `POST /api/items` and `PUT /api/items/{id}` endpoints let you add and edit resource details in memory so the dashboard can manage tooling without relying on upstream support.
 - **Assignments**: Warehouse associates are promoted from employees through `POST /api/warehouse/assignments/promote/{userId}`. Item assignments are stored in memory and managed with `POST /api/warehouse/assignments/{userId}/items` plus read via `GET /api/warehouse/assignments`.
 - **Dashboard views**: `GET /api/warehouse/workforce-summary` and `GET /api/warehouse/employees` provide the SPA with workforce and roster snapshots for the landing dashboard.
 
