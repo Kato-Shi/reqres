@@ -45,5 +45,5 @@ To produce a static bundle, run `npm run build` inside `warehouse-frontend/`; th
 
 ## Notes
 - The API honors the ReqRes demo login credentials locally: `eve.holt@reqres.in` / `cityslicka` (no external call is made for login).
-- Other endpoints still communicate with ReqRes; if your network blocks `reqres.in`, employee/resource calls may surface proxy errors.
+- Other endpoints still communicate with ReqRes; if your network blocks `reqres.in`, the API now falls back to demo employees/resources so Swagger and the SPA stay functional even when the upstream returns 401/403.
 - Because assignment data is in-memory, restarting the API clears promotions/assignments; user/resource data is always refreshed from ReqRes.
